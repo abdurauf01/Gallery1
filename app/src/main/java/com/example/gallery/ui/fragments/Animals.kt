@@ -26,16 +26,18 @@ class Animals : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val recyclerView: RecyclerView = view.findViewById(R.id.animals)
         val adapter = PhotosAdapter()
-        val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        val viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+        viewModel.getPhotoFromRep("animals")
         viewModel.res.observe(requireActivity()) {
-            adapter.submitItem(it)
+            adapter.submitItem(it.results)
+            viewModel.getPhotosFromRepp(it)
         }
         viewModel.error.observe(requireActivity()) {
             Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
         }
         recyclerView.layoutManager = GridLayoutManager(requireActivity(), 3)
         recyclerView.adapter = adapter
-        viewModel.getPhotoFromRep("animals")
+
         adapter.setOytimClickListener {
             val intent = Intent(requireActivity(), PhotoZoom::class.java)
             intent.putExtra("t1", it.urls.small)

@@ -7,20 +7,40 @@
     tools:context=".ui.fragments.MainActivity">
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabGravity="center"
-        app:tabIndicatorAnimationMode="linear"
-        app:tabIndicatorGravity="bottom"
-        app:tabMode="scrollable" />
+        android:background="@color/tabBackground"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/home"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:tabGravity="center"
+            app:tabIndicatorAnimationMode="linear"
+            app:tabIndicatorGravity="bottom"
+            app:tabMode="scrollable"
+            android:background="@color/tabBackground"
+            app:tabTextColor="@color/white" />
+    </LinearLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
+        android:layout_marginTop="125dp"
         android:orientation="horizontal" />
 
 

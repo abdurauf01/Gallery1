@@ -10,13 +10,14 @@ import com.bumptech.glide.Glide
 import com.example.gallery.R
 import com.example.gallery.models.Resultt
 
-class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.MyHolder>() {
+class AllPhotosAdapter : RecyclerView.Adapter<AllPhotosAdapter.MyHolder>() {
+
     private var list = ArrayList<Resultt>()
     private var listener: ((Resultt) -> Unit)? = null
 
     inner class MyHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(resultt: Resultt) {
-            val image = itemView.findViewById<ImageView>(R.id.imager)
+            val image = itemView.findViewById<ImageView>(R.id.all_image)
             Glide.with(itemView).load(resultt.urls.full).into(image)
             itemView.setOnClickListener {
                 listener?.invoke(list[adapterPosition])
@@ -26,24 +27,24 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.MyHolder>() {
 
     }
 
-    fun setOytimClickListener(l: (Resultt) -> Unit) {
+    fun setOytimClickListenerr(l: (Resultt) -> Unit) {
         listener = l
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.image_items, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_all_photos, parent, false)
         return MyHolder(view)
     }
 
 
-    fun submitItem(item: List<Resultt>) {
-//        val util = DiffUtill(item, list)
-//        val diff = DiffUtil.calculateDiff(util)
-//        diff.dispatchUpdatesTo(this)
-        list.clear()
-        list.addAll(item)
-        notifyDataSetChanged()
-    }
+     fun submitItem(item: List<Resultt>) {
+//         val util = DiffUtilll(item, list)
+//         val diff = DiffUtil.calculateDiff(util)
+//         diff.dispatchUpdatesTo(this)
+         list.clear()
+         list.addAll(item)
+         notifyDataSetChanged()
+     }
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) = holder.bind(list[position])
 
@@ -51,7 +52,7 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.MyHolder>() {
     override fun getItemCount(): Int = list.size
 }
 
-class DiffUtill(var new: List<Resultt>, var old: List<Resultt>) : DiffUtil.Callback() {
+class DiffUtilll(var new: List<Resultt>, var old: List<Resultt>) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return old.size
     }
@@ -61,7 +62,7 @@ class DiffUtill(var new: List<Resultt>, var old: List<Resultt>) : DiffUtil.Callb
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return old[oldItemPosition] == new[oldItemPosition]
+        return old[oldItemPosition].id == new[oldItemPosition].id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
